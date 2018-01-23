@@ -1,0 +1,76 @@
+﻿<div class="container-fluid">
+    <div class="row"></div>
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-success">
+            <div class="panel-heading"><h4>Ustawienia</h4></div>
+            <div class="panel-body">
+                <div class="row text-center well">
+                    <div class="col-md-6 col-md-offset-3">
+                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#changeUsernameModal"><span class="glyphicon glyphicon-text-background"></span> Zmień nazwę użytkownika</button>
+                        <div id="changeUsernameModal" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Zmień nazwę użytkownika</h4>
+                                    </div>
+                                    <div class="modal-body well well-sm">
+                                        <form name="changeUsername" ng-submit="vm.changeUsername()" role="form">
+                                            <div class="well-sm">Nowa nazwa:</div>
+                                            <div class="row well-sm">
+                                                <div class="col-md-6 col-md-offset-3"><input type="text" class="form-control" ng-model="username" /></div>
+                                            </div>
+                                            <div class="well well-sm">
+                                                <button type="submit" class="btn btn-primary">Zatwierdź</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row text-center well">
+                    <div class="col-md-6 col-md-offset-3">
+                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#changePasswordModal"><span class="glyphicon glyphicon-lock"></span> Zmień hasło</button>
+                        <div id="changePasswordModal" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Zmień hasło</h4>
+                                    </div>
+                                    <div class="modal-body well well-sm">
+                                        <form name="changePassword" ng-submit="vm.changePassword()" role="form">
+                                            <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+                                                <div>Hasło</div>
+                                                <div class="row">
+                                                    <div class="col-md-6 col-md-offset-3">
+                                                        <input type="password" name="password" class="form-control" ng-model="password" required/>
+                                                    </div>
+                                                </div>
+                                                <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Hasło jest wymagane</span>
+                                            </div>
+                                            <div class="form-group" ng-class="{ 'has-error': form.confirmpassword.$dirty && form.confirmpassword.$error.required }">
+                                                <div>Powtórz hasło</div>
+                                                <div class="row">
+                                                    <div class="col-md-6 col-md-offset-3">
+                                                        <input type="password" name="confirmpassword" class="form-control" ng-model="confirmpassword" required/>
+                                                    </div>
+                                                </div>
+                                                <span ng-show="form.confirmpassword.$dirty && form.confirmpassword.$error.required" class="help-block">Hasło jest wymagane</span>
+                                            </div>
+                                            <div class="well well-sm form-actions">
+                                                <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Zatwierdź</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

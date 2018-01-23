@@ -1,0 +1,102 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="well col-md-6 col-md-offset-3">
+            <form class="form-horizontal" ng-submit="vm.signup()">
+                <div>
+                    <div class="well">
+                        <h3>Dane osobowe:</h3>
+                        <div class="form-group">
+                            <label for="firstName" class="col-lg-2 control-label">Imię</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="firstName" placeholder="Imię" ng-model="tutor.FirstName" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName" class="col-lg-2 control-label">Nazwisko</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="lastName" placeholder="Nazwisko" ng-model="tutor.LastName" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="well">
+                        <h3>Kierunki studiów:</h3>
+                        <div class="form-group">
+                            <div class="col-lg-10">
+                                <div ng-if="courses.length == 0">
+                                    Lista kierunków jest pusta
+                                </div>
+                                <table class="table table-striped" ng-if="courses.length > 0">
+                                    <thead>
+                                    <tr>
+                                        <td>L.p.</td>
+                                        <td>Uczelnia</td>
+                                        <td>Wydział</td>
+                                        <td>Kierunek</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="course in courses">
+                                        <td>
+                                            {{$index + 1}}
+                                        </td>
+                                        <td>
+                                            {{course.Faculty.University.ShortName}}
+                                        </td>
+                                        <td>
+                                            {{course.Faculty.ShortName}}
+                                        </td>
+                                        <td>
+                                            {{course.Name}}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-lg-10">
+                                <h4>Dodaj kierunek</h4>
+                                <div class="form-group">
+                                    <h4><label for="university" class="col-lg-2 control-label">Uczelnia</label></h4>
+                                    <div class="col-lg-10">
+                                        <select class="form-control" id="university" ng-model="Course.UniId" ng-change="vm.getFaculties()">
+                                            <option ng-repeat="university in vm.universities" value="{{university.Id}}">
+                                                {{university.Name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h4><label for="faculty" class="col-lg-2 control-label">Wydział</label></h4>
+                                    <div class="col-lg-10">
+                                        <select class="form-control" id="faculty" ng-model="Course.FacId" ng-change="vm.getCourses()">
+                                            <option ng-repeat="faculty in vm.faculties" value="{{faculty.Id}}">{{faculty.Name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h4><label for="course" class="col-lg-2 control-label">Kierunek</label></h4>
+                                    <div class="col-lg-10">
+                                        <select class="form-control" id="course" ng-model="Course.CouId">
+                                            <option ng-repeat="course in vm.courses" value="{{course.Id}}">{{course.Name}}, początek {{course.StartYear}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-md-offset-3">
+                                        <div class="form-group" ng-if="Course.CouId !== undefined">
+                                            <button type="button" class="btn btn-success" ng-click="vm.addCourseToTable()">Dodaj kierunek</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Zatwierdź</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

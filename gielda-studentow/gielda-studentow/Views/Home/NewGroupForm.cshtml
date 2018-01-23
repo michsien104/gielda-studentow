@@ -1,0 +1,40 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 well">
+            <h3>Dodaj profil grupy</h3>
+            <form role="button" ng-submit="vm.addGroup()">
+                <div class="form-group">
+                    <label for="university">Uczelnia</label>
+                    <select class="form-control" id="university" ng-model="UniId" ng-change="vm.getFaculties()">
+                        <option ng-repeat="university in vm.universities" value="{{university.Id}}">
+                            {{university.Name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="faculty">Wydział</label>
+                    <select class="form-control" id="faculty" ng-model="FacId" ng-change="vm.getCourses()">
+                        <option ng-repeat="faculty in vm.faculties" value="{{faculty.Id}}">
+                            {{faculty.Name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="course">Kierunek</label>
+                    <select class="form-control" id="course" ng-model="CouId">
+                        <option ng-repeat="course in vm.courses" value="{{course.Id}}">
+                            {{course.Name}}, początek {{course.StartYear}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="name">Nazwa grupy</label>
+                    <input type="text" class="form-control" id="name" ng-model="name"/>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-success">Zatwierdź</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

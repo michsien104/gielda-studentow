@@ -1,0 +1,45 @@
+﻿<div class="container-fluid">
+    <form role="form" ng-submit="vm.join()">
+        <fieldset>            
+            <div class="form-group">
+                <h4><label for="university" class="col-lg-2 control-label">Uczelnia</label></h4>
+                <div class="col-lg-10">
+                    <select class="form-control" id="university" ng-model="Course.UniId" ng-change="vm.getFaculties()">
+                        <option ng-repeat="university in vm.universities" value="{{university.Id}}">
+                            {{university.Name}}
+                        </option>
+                    </select>                   
+                </div>
+            </div>
+            <div class="form-group">
+                <h4><label for="faculty" class="col-lg-2 control-label">Wydział</label></h4>
+                <div class="col-lg-10">
+                    <select class="form-control" id="faculty" ng-model="Course.FacId" ng-change="vm.getCourses()">
+                        <option ng-repeat="faculty in vm.faculties" value="{{faculty.Id}}">{{faculty.Name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <h4><label for="course" class="col-lg-2 control-label">Kierunek</label></h4>
+                <div class="col-lg-10">
+                    <select class="form-control" id="course" ng-model="Course.CouId" ng-change="vm.getGroups()">
+                        <option ng-repeat="course in vm.courses" value="{{course.Id}}">{{course.Name}}, początek {{course.StartYear}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <h4><label for="group" class="col-lg-2 control-label">Grupy</label></h4>
+                <div class="col-lg-10">
+                    <select class="form-control" id="group" ng-model="Course.GrpIds" multiple>
+                        <option ng-repeat="group in vm.groups" value="{{group.Id}}">{{group.Name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>

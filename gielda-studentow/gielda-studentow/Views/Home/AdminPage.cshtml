@@ -1,0 +1,311 @@
+﻿<div class="container-fluid row">
+<div class="col-md-6 col-md-offset-3">
+<div class="row" ng-if="vm.admGroups.length == 0 && vm.admCourses.length == 0 && vm.admFaculties.length == 0 && vm.admUniversities.length == 0">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="jumbotron">
+            <div class="text-center">
+                <h2>Aktualnie nie jesteś administratorem żadnej jednostki</h2>
+                <br/>
+                <p>Dodaj grupę jednostki</p>
+            </div>
+            <br/>
+            <br/>
+            <div class="text-center">
+                <p>
+                    <span>
+                        <a class="btn btn-primary btn-lg" role="button" style="width: 230px">Dodaj uczelnię</a>
+                    </span>
+                    <span>
+                        <a class="btn btn-primary btn-lg" role="button" style="width: 230px">Dodaj wydział</a>
+                    </span>
+                </p>
+                <p>
+                    <span>
+                        <a class="btn btn-primary btn-lg" role="button" style="width: 230px">Dodaj kierunek</a>
+                    </span>
+                    <span>
+                        <a class="btn btn-primary btn-lg" role="button" style="width: 230px">Dodaj grupę kierunku</a>
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-if="vm.admUniversities.length > 0" class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">Uczelnie</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped table-hover text-center">
+            <thead>
+            <tr>
+                <td>
+                    <strong>L.p.</strong>
+                </td>
+                <td>
+                    <strong>Nazwa</strong>
+                </td>
+                <td>
+                    <strong>Opcje</strong>
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="university in vm.admUniversities">
+                <td style="vertical-align: middle">{{$index + 1}}</td>
+                <td style="vertical-align: middle">{{university.Name}}</td>
+                <td style="vertical-align: middle">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#messageUni{{university.Id}}"><span class="glyphicon glyphicon-envelope"></span> Wiadomość</button>
+                    <div id="messageUni{{university.Id}}" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form role="form" class="form-horizontal" ng-submit="vm.sendUniversityMessage(title, content, university.Id)">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Wiadomość do {{university.ShortName}}</h4>
+                                    </div>
+                                    <div class="modal-body well well-lg">
+                                        <div class="form-group text-center">
+                                            <label for="subjectU">Temat</label>
+                                            <input id="subjectU" type="text" ng-model="title" class="form-control" style="min-width: 80%;margin: auto"/>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <label for="contentU">Treść</label>
+                                            <textarea id="contentU" type="text" ng-model="content" class="form-control" style="min-width: 80%;margin: auto"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-success">Wyślij</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+<div ng-if="vm.admFaculties.length > 0" class="panel panel-warning">
+    <div class="panel-heading">
+        <h3 class="panel-title">Wydziały</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped table-hover text-center">
+            <thead>
+            <tr>
+                <td>
+                    <strong>L.p.</strong>
+                </td>
+                <td>
+                    <strong>Nazwa</strong>
+                </td>
+                <td>
+                    <strong>Uczelnia</strong>
+                </td>
+                <td>
+                    <strong>Opcje</strong>
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="faculty in vm.admFaculties">
+                <td style="vertical-align: middle">{{$index + 1}}</td>
+                <td style="vertical-align: middle">{{faculty.Name}}</td>
+                <td style="vertical-align: middle">{{faculty.University.ShortName}}</td>
+                <td style="vertical-align: middle">
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#messageFac{{faculty.Id}}"><span class="glyphicon glyphicon-envelope"></span> Wiadomość</button>
+                    <div id="messageFac{{faculty.Id}}" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form role="form" class="form-horizontal" ng-submit="vm.sendFacultyMessage(title, content, faculty.Id)">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Wiadomość do {{faculty.ShortName}}</h4>
+                                    </div>
+                                    <div class="modal-body well well-lg">
+                                        <div class="form-group">
+                                            <label for="subjectF">Temat</label>
+                                            <input id="subjectF" type="text" ng-model="title" class="form-control" style="min-width: 80%;margin: auto"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="contentF">Treść</label>
+                                            <textarea id="contentF" type="text" ng-model="content" class="form-control" style="min-width: 80%;margin: auto"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-warning">Wyślij</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div ng-if="vm.admCourses.length > 0" class="panel panel-danger">
+    <div class="panel-heading">
+        <h3 class="panel-title">Kierunki</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped table-hover text-center">
+            <thead>
+            <tr>
+                <td>
+                    <strong>L.p.</strong>
+                </td>
+                <td>
+                    <strong>Nazwa</strong>
+                </td>
+                <td>
+                    <strong>Wydział</strong>
+                </td>
+                <td>
+                    <strong>Uczelnia</strong>
+                </td>
+                <td>
+                    <strong>Opcje</strong>
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="course in vm.admCourses">
+                <td style="vertical-align: middle">{{$index + 1}}</td>
+                <td style="vertical-align: middle">{{course.Name}}</td>
+                <td style="vertical-align: middle">{{course.Faculty.ShortName}}</td>
+                <td style="vertical-align: middle">{{course.Faculty.University.ShortName}}</td>
+                <td style="vertical-align: middle">
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#messageCou{{course.Id}}"><span class="glyphicon glyphicon-envelope"></span> Wiadomość</button>
+                    <div id="messageCou{{course.Id}}" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form role="form" class="form-horizontal" ng-submit="vm.sendCourseMessage(title, content, course.Id)">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Wiadomość do {{course.Name}} {{course.Faculty.ShortName}} {{course.Faculty.University.ShortName}}</h4>
+                                    </div>
+                                    <div class="modal-body well well-lg">
+                                        <div class="form-group">
+                                            <label for="subjectC">Temat</label>
+                                            <input id="subjectC" type="text" ng-model="title" class="form-control" style="min-width: 80%;margin: auto"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="contentC">Treść</label>
+                                            <textarea id="contentC" type="text" ng-model="content" class="form-control" style="min-width: 80%;margin: auto"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-danger">Wyślij</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div ng-if="vm.admGroups.length > 0" class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">Grupy</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped table-hover text-center">
+            <thead>
+            <tr>
+                <td>
+                    <strong>L.p.</strong>
+                </td>
+                <td>
+                    <strong>Nazwa</strong>
+                </td>
+                <td>
+                    <strong>Kierunek</strong>
+                </td>
+                <td>
+                    <strong>Wydział</strong>
+                </td>
+                <td>
+                    <strong>Uczelnia</strong>
+                </td>
+                <td>
+                    <strong>Opcje</strong>
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="group in vm.admGroups">
+                <td style="vertical-align: middle">{{$index + 1}}</td>
+                <td style="vertical-align: middle">{{group.Name}}</td>
+                <td style="vertical-align: middle">{{group.CourseOfStudy.Name}}</td>
+                <td style="vertical-align: middle">{{group.CourseOfStudy.Faculty.ShortName}}</td>
+                <td style="vertical-align: middle">{{group.CourseOfStudy.Faculty.University.ShortName}}</td>
+                <td style="vertical-align: middle">
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#messageGrp{{group.Id}}"><span class="glyphicon glyphicon-envelope"></span> Wiadomość</button>
+                    <div id="messageGrp{{group.Id}}" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form role="form" class="form-horizontal" ng-submit="vm.sendGroupMessage(title, content, group.Id)">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Wiadomość do {{group.Name}} {{group.CourseOfStudy.Name}}</h4>
+                                    </div>
+                                    <div class="modal-body well well-lg">
+                                        <div class="form-group">
+                                            <label for="subjectG">Temat</label>
+                                            <input id="subjectG" type="text" ng-model="title" class="form-control" style="min-width: 80%;margin: auto"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="contentG">Treść</label>
+                                            <textarea id="contentG" type="text" ng-model="content" class="form-control" style="min-width: 80%;margin: auto"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-info">Wyślij</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div ng-if="vm.admGroups.length > 0 || vm.admCourses.length > 0 || vm.admFaculties.length > 0 || vm.admUniversities.length > 0">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Dodaj grupę jednostki</h3>
+        </div>
+        <div class="panel-body">
+            <div class="text-center">
+                <p>
+                    <span>
+                        <a href="/#!/newuniversity" class="btn btn-primary" role="button" style="width: 230px">Dodaj uczelnię</a>
+                    </span>
+                    <span>
+                        <a href="/#!/newfaculty" class="btn btn-primary" role="button" style="width: 230px">Dodaj wydział</a>
+                    </span>
+                </p>
+                <p>
+                    <span>
+                        <a href="/#!/newcourseofstudy" class="btn btn-primary" role="button" style="width: 230px">Dodaj kierunek</a>
+                    </span>
+                    <span>
+                        <a href="/#!/newgroup" class="btn btn-primary" role="button" style="width: 230px">Dodaj grupę kierunku</a>
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>

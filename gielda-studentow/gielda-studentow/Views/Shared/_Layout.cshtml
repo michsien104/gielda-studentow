@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container body-content">    
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section> 
+        <hr />
+        <footer class="navbar-fixed-bottom">
+            <p>&copy; @DateTime.Now.Year - Giełda Studentów BETA</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/angular")
+    <script src="~/SPA/myApp.js"></script>
+    <script src="~/SPA/Controllers/RegisterController.js"></script>
+    <script src="~/SPA/Controllers/LoginController.js"></script>
+    <script src="~/SPA/Controllers/ProfileController.js"></script>
+    <script src="~/SPA/Services/RegisterService.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

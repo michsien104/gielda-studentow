@@ -1,0 +1,238 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-2 text-center">
+            <div class="panel panel-default" style="height: 330px;">
+                <div class="panel-heading">
+                    <div class=" text-center">
+                        <h3>
+                            Zdjęcie profilowe<button data-toggle="modal" data-target="#avatarModal" class="btn btn-link glyphicon glyphicon-edit pull-right"></button>
+                        </h3>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="img-thumbnail">
+                        <img src="{{profile.AvatarUrl}}" alt="Brak zdjęcia" style="width: 200px; height: 200px;"/>
+                    </div>
+                </div>
+                <!-- avatarModal -->
+                <div id="avatarModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Edytuj zdjęcie profilowe</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div>
+                                    <form name="editAvatar" class=" text-center" ng-submit="updateAvatarUrl()" role="form">
+                                        <label for="url">Link do zdjęcia:</label>
+                                        <textarea class="form-control" style="min-width: 100%" rows="1" id="url" ng-model="Url">{{profile.AvatarUrl}}</textarea>
+                                        <button type="submit" class="btn btn-primary">Zatwierdź</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default" style="height: 330px;">
+                <div class="panel-heading">
+                    <div class="text-center">
+                        <h3>
+                            Dane użytkownika
+                        </h3>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <p ng-if="profile.UserName">Login: {{profile.UserName}}</p>
+                    <p ng-if="profile.PhoneNumber">Tel. kontaktowy: {{profile.PhoneNumber}}</p>
+                    <p ng-if="profile.Email">Email: {{profile.Email}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-if="student">
+        <div class="panel panel-default col-md-8 col-md-offset-2">
+            <div class="panel-heading text-center row">
+                <h3>Dane studenta</h3>
+            </div>
+            <div class="panel-body row">
+                <div>
+                    <p>Imię: {{student.FirstName}}</p>
+                    <p>Nazwisko: {{student.LastName}}</p>
+                </div>
+                <div>
+                    <a style="cursor: pointer" data-toggle="modal" data-target="#updateData"><strong>Aktualizuj dane</strong></a>
+                    <div id="updateData" class="modal fade" role="dialog">
+                        <form class="form-horizontal" ng-submit="vm.updateData(NewFirstName,NewLastName)" role="form">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Aktualizuj dane</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-6 col-md-offset-3 text-center">
+                                                <div class="form-group">
+                                                    <label for="firstName">Imię</label>
+                                                    <input type="text" id="firstName" class="form-control" ng-model="NewFirstName" name="NewFirstName"/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="lastName">Nazwisko</label>
+                                                    <input type="text" id="lastName" class="form-control" ng-model="NewLastName" name="NewLastName"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-success">Zatwierdź</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <p>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr ng-if="vm.courses.length > 0">
+                            <td>
+                                <h4>Kierunek</h4>
+                            </td>
+                            <td>
+                                <h4>Uczelnia</h4>
+                            </td>
+                            <td>
+                                <h4>Rok rozpoczęcia</h4>
+                            </td>
+                            <td>
+                                <h4>Opcje</h4>
+                            </td>
+                        </tr>
+                        <tr ng-if="vm.courses.length == 0">
+                            <td colspan="4" class="text-center">
+                                <h4>Brak dodanych kierunków</h4>
+                            </td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="course in vm.courses">
+                            <td style="vertical-align: middle">
+                                <h5>{{course.Name}}</h5>
+                            </td>
+                            <td style="vertical-align: middle">
+                                <h5>{{course.Faculty.University.ShortName}}</h5>
+                            </td>
+                            <td style="vertical-align: middle">
+                                <h5>{{course.StartYear}}</h5>
+                            </td>
+                            <td>
+                                <h5>
+                                    <button class="btn btn-success" data-toggle="modal" data-target="#courseModal{{course.Id}}">Więcej</button>
+                                </h5>
+                            </td>
+                            <!-- courseModal -->
+                            <div ng-repeat="course in vm.courses">
+                                <div id="courseModal{{course.Id}}" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">{{course.Name}}</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row well">
+                                                    <div class="col-md-6 text-center">
+                                                        <strong>Kierunek:</strong>
+                                                    </div>
+                                                    <div class="col-md-6 text-center">{{course.Name}}</div>
+                                                </div>
+                                                <div class="row well">
+                                                    <div class="col-md-6 text-center">
+                                                        <strong>Wydział:</strong>
+                                                    </div>
+                                                    <div class="col-md-6 text-center">{{course.Faculty.Name}}</div>
+                                                </div>
+                                                <div class="row well">
+                                                    <div class="col-md-6 text-center">
+                                                        <strong>Uczelnia:</strong>
+                                                    </div>
+                                                    <div class="col-md-6 text-center">{{course.Faculty.University.Name}}</div>
+                                                </div>
+                                                <div class="row well">
+                                                    <div class="col-md-6 text-center">
+                                                        <strong>Rok rozpoczęcia:</strong>
+                                                    </div>
+                                                    <div class="col-md-6 text-center">{{course.StartYear}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr rowspan="2">
+                            <td class="text-center" colspan="4">
+                                <a href="/#!/coursemanage" class="btn btn-primary">Zarządzaj kierunkami</a>
+                            </td>
+                        </tr>
+                        </tfoot>
+                        <tr></tr>
+                    </table>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-if="tutor">
+        <div class="panel panel-default col-md-8 col-md-offset-2">
+            <div class="panel-heading text-center row">
+                <h3>Dane korepetytora</h3>
+            </div>
+            <div class="panel-body">
+                <div ng-if="tutor.FirstName != undefined && tutor.LastName != undefined">
+                    <p>Imię: {{tutor.FirstName}}</p>
+                    <p>Nazwisko: {{tutor.LastName}}</p>
+                    <h3>Moje kierunki</h3>
+                    <div ng-if="vm.tutorCourses.length == 0">
+                        Lista kierunków jest pusta
+                    </div>
+                    <table class="table table-striped" ng-if="vm.tutorCourses.length > 0">
+                        <thead>
+                        <tr>
+                            <td><strong>L.p.</strong></td>
+                            <td><strong>Uczelnia</strong></td>
+                            <td><strong>Wydział</strong></td>
+                            <td><strong>Kierunek</strong></td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="course in vm.tutorCourses">
+                            <td>
+                                {{$index + 1}}
+                            </td>
+                            <td>
+                                {{course.Faculty.University.ShortName}}
+                            </td>
+                            <td>
+                                {{course.Faculty.ShortName}}
+                            </td>
+                            <td>
+                                {{course.Name}}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div ng-if="tutor.FirstName == undefined || tutor.LastName == undefined" class="text-center">
+                    <a href="/#!/signuptutor" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-blackboard"></span> Uzupełnij dane</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

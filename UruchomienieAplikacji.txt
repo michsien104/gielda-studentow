@@ -1,0 +1,7 @@
+Uruchomienie:
+	Aby uruchomiæ projekt nale¿y zaimportowaæ projekt do IDE, zbudowaæ projekt gielda-studentow i zaczekaæ na zaimportowanie wszystkich pakietów.
+Nastêpnie  w solucji przejœæ do projektu StudentExchangeDataAccess. 
+W pliku /Context/StudentExchangeDataContext zkonfigurowaæ dostêp do bazy danych (nazwa serwera, nazwa bazy, username i has³o). 
+Aby utworzy³y sie odpowiednie relacje najpierw rêcznie trzeba stworzyæ bazê oraz ustawiæ jej nazwê.
+Przy ka¿dym uruchomieniu aplikacji, baza danych jest na nowo inicjalizowana wartoœciami testowymi zdefiniowanymi w obiekcie MyInitializer.
+Po uruchomieniu aplikacji aby zobaczyæ testowe dane mo¿na zalogowaæ siê na konto o nazwie u¿ytkownika:akowalski i haœle:abc123.

@@ -1,0 +1,47 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-2 text-center">
+            <div class="panel panel-default" style="height: 330px;">
+                <div class="panel-heading">
+                    <div class=" text-center">
+                        <h3>
+                            Zdjęcie profilowe
+                        </h3>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="img-thumbnail">
+                        <img src="{{student.AvatarUrl}}" alt="Brak zdjęcia" style="width: 200px; height: 200px;"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default" style="height: 330px;">
+                <div class="panel-heading text-center"><h3>Dane użytkownika</h3></div>
+                <div class="panel-body">
+                    <p ng-if="student.UserName">Login: {{student.UserName}}</p>
+                    <p ng-if="student.PhoneNumber">Tel. kontaktowy: {{student.PhoneNumber}}</p>
+                    <p ng-if="student.Email">Email: {{student.Email}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div ng-if="student" class="panel panel-default">
+                <div class="panel-heading text-center"><h3>Dane studenta</h3></div>
+                <div class="panel-body">
+                    <p>Imię: {{student.FirstName}}</p>
+                    <p>Nazwisko: {{student.LastName}}</p>
+                    <p>
+                        Studiuje:
+                        <ul>
+                            <li ng-repeat="course in coursesOfStudy">{{course.Name}}</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

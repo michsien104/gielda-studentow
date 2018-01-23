@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title>GieldaStudentow - Beta</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/angular")
+
+    <script src="~/SPA/myApp.js"></script>
+    @Scripts.Render("~/bundles/controllers")
+    @Scripts.Render("~/bundles/services")
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+</head>
+
+<body ng-controller="IndexController as vm" style="background-image: url(https://image.ibb.co/mhLOzw/b.jpg); background-repeat: no-repeat; background-attachment: fixed">
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            </button>
+            <a ng-if="vm.isUserSignedIn() === true" href="/#!/cards" class="navbar-brand"><span class="glyphicon glyphicon-home"></span> Strona główna</a>
+            <a ng-if="vm.isUserSignedIn() === false" href="/#!/mainpage" class="navbar-brand"><span class="glyphicon glyphicon-home"></span> Strona główna</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li ng-if="vm.isUserSignedIn() === true">
+                    <a href="/#!/myprofile" class="navbar-brand"><span class="glyphicon glyphicon-user"></span> Mój Profil</a>
+                </li>
+                <li ng-if="vm.isUserSignedIn() === true">
+                    <a href="/#!/addAnnouncement" class="navbar-brand"><span class="glyphicon glyphicon-plus-sign"></span> Dodaj ogłoszenie</a>
+                </li>
+                <li ng-if="vm.isUserSignedIn() === true">
+                    <a href="/#!/adminpage" class="navbar-brand"><span class="glyphicon glyphicon-bullhorn"></span> Zarządzanie jednostkami</a>
+                </li>
+                <li ng-if="vm.isUserSignedIn() === true">
+                    <a href="/#!/myAnnouncements" class="navbar-brand"><span class="glyphicon glyphicon-file"></span> Moje ogłoszenia</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-if="vm.isUserSignedIn() === false">
+                    <a href="/#!/register" class="navbar-brand"><span class="glyphicon glyphicon-user"></span> Rejestracja</a>
+                </li>
+                <li ng-if="vm.isUserSignedIn() === false">
+                    <a href="/#!/login" class="navbar-brand"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+                </li>
+                <li ng-if="vm.isUserSignedIn() === true">
+                    <a href="/#!/settings" class="navbar-brand"><span class="glyphicon glyphicon-cog"></span> Ustawienia</a>
+                </li>
+                <li ng-if="vm.isUserSignedIn() === true">
+                    <button class="navbar-brand btn btn-link" ng-click="vm.logout()"><span class="glyphicon glyphicon-log-out"></span> Wyloguj</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+<div style="height: 90%" ng-view></div>
+</body>
+</html>
